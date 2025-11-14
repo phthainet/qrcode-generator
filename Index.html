@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo QRCode từ URL</title>
+    <!-- Bootstrap offline -->
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="customstylesheet.css">
+    <link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
+    <!-- QRCodeJS offline -->
+    <script src="qrcode.min.js"></script>
+</head>
+<body class="bg-dark text-light">
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay d-none">
+        <div class="spinner-border text-primary loading-spinner" role="status"></div>
+        <div class="loading-text mt-3">Đang xử lý, vui lòng đợi...</div>
+    </div>
+    <div class="container py-5">
+        <!-- Logo + Header -->
+        <div class="text-center mb-4">
+            <img src="logo_CVN.png" class="logo-app" alt="LOGO">
+            <h1 class="mt-3 fw-bold text-light">ỨNG DỤNG TẠO QR CODE</h1>
+        </div>
+        <div class="card-body">
+            <!-- URL -->
+            <label class="form-label fw-semibold text-light">Nhập URL (Web, Google drive...)</label>
+            <input type="text" id="urlInput" class="form-control form-control-lg mb-3"
+                placeholder="https://demo.vn/" autocomplete="off">
+            <!-- LOGO THƯƠNG HIỆU (luôn hiển thị, tùy chọn) -->
+            <div class="mb-3">
+                <label class="form-label text-light fw-semibold">
+                    Thêm hình vào QR Code
+                </label>
+                <input type="file" id="logoInput" accept="image/*" class="form-control form-control-sm mb-2">
+                <div class="form-text text-warning">
+                    Lưu ý: Nên dùng logo nền trong suốt để quét ổn định. Nếu không chọn logo thì QR sẽ không có logo.
+                </div>
+            </div>
+            <!-- CHỌN MÀU QR -->
+            <div class="mt-3 border p-3 rounded" style="background:#1e293b;">
+                <label class="form-label text-light fw-semibold">Tùy chỉnh Màu QR Code</label>
+                <div class="row g-2">
+                    <div class="col-6">
+                        <label class="text-light small">Màu QR Code:</label>
+                        <input type="color" id="qrColor" value="#000000" class="form-control form-control-color">
+                    </div>
+
+                    <div class="col-6">
+                        <label class="text-light small">Màu nền QR Code:</label>
+                        <input type="color" id="qrBgColor" value="#ffffff" class="form-control form-control-color">
+                    </div>
+                </div>
+                <div class="form-text text-warning mt-2">
+                    Gợi ý: màu thương hiệu → xanh #0033A1, đỏ #C8102E, xanh lá #00984A
+                </div>
+            </div>
+            <br>
+            <!-- Nút tạo -->
+            <button id="generateBtn" class="btn btn-primary btn-lg w-100 mb-2 fw-bold">
+                <i class="bi bi-qr-code-scan semibold"></i> Tạo QR Code
+            </button>
+            <!-- Kết quả -->
+            <div id="outputSection" class="mt-4 d-none text-center">
+                <!-- QR có khung viền + overlay logo -->
+                <div id="qrContainer" class="qr-box mb-2 position-relative d-inline-block">
+                    <div id="qrcode"></div>
+                    <!-- overlay logo ở giữa -->
+                    <img id="logoOverlay" alt="Logo giữa QR" style="display:none;">
+                </div>
+                <p class="mb-2 fw-semibold">
+                    URL: <a id="urlDisplay" href="#" target="_blank" class="link-warning"></a>
+                </p>
+                <button id="downloadQrBtn" class="btn btn-danger btn-lg w-100 mt-3 fw-bold">
+                    <i class="bi bi-download fw-semibold"></i> Tải QR (PNG)
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Custom JS -->
+    <script src="customjs.js"></script>
+</body>
+</html>
